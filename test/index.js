@@ -3,7 +3,7 @@ import rapunzel from '../lib';
 
 describe('rapunzel', function() {
 	it('works!', function() {
-				
+
 		var h_obj = {
 			example: {
 				of: 'stringifying a simple object',
@@ -11,17 +11,17 @@ describe('rapunzel', function() {
 			},
 		};
 
-		var stringify_obj = function(add, h_part, s_merge) {
+		var stringify_obj = function(add, h_part, b_first_line) {
 			if('string' === typeof h_part) {
-				add("'"+h_part.replace(/'/g, "\\'")+"'", ' ');
+				add(`'${h_part.replace(/'/g, '\\\'')}'`, true);
 			}
 			else {
-				this.open('{', ',', s_merge);
+				add.open('{', ',', !b_first_line);
 				for(var s_property in h_part) {
-					add(s_property+':');
-					stringify_obj.apply(this, [add, h_part[s_property], ' ']);
+					add(s_property+': ');
+					stringify_obj(add, h_part[s_property]);
 				}
-				this.close('}');
+				add.close('}');
 			}
 		};
 
@@ -30,17 +30,24 @@ describe('rapunzel', function() {
 				add('// this is the beginning');
 			},
 			body: function(add) {
-				stringify_obj.apply(this, [add, h_obj, '']);
+				stringify_obj(add, h_obj, true);
 			},
 			closing: function(add) {
 				add('// this is the end');
 			},
-		});
+		}, ['preamble', 'body', 'closing']);
 
 		var s_output = k_builder.produce({
 			indent: '\t',
 		});
 
-		console.warn(s_output);
+		assert.strictEqual(`// this is the beginning
+{
+	example: {
+		of: 'stringifying a simple object',
+		that: 'only has objects and strings',
+	},
+}
+// this is the end`, s_output);
 	});
 });
