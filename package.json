@@ -1,6 +1,6 @@
 {
   "name": "rapunzel",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A lightweight module to simplify the process of generating pretty strings of code",
   "homepage": "",
   "author": {
