@@ -1,6 +1,16 @@
 import assert from 'assert';
 import rapunzel from '../lib';
 
+const S_EXPECTS = `// this is the beginning
+{
+	example: {
+		of: 'stringifying a simple object',
+		that: 'only has objects and strings',
+	},
+}
+// this is the end`;
+
+
 describe('rapunzel', function() {
 
 	var h_obj = {
@@ -47,13 +57,17 @@ describe('rapunzel', function() {
 			indent: '\t',
 		});
 
-		assert.strictEqual(`// this is the beginning
-{
-	example: {
-		of: 'stringifying a simple object',
-		that: 'only has objects and strings',
-	},
-}
-// this is the end`, s_output);
+		assert.strictEqual(S_EXPECTS, s_output);
+	});
+
+	it('.remove()', function() {
+
+		k_builder.remove('preamble');
+
+		var s_output = k_builder.produce({
+			indent: '\t',
+		});
+
+		assert.strictEqual(S_EXPECTS.replace(/^[^\n]*\n/, ''), s_output);
 	});
 });
