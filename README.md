@@ -27,12 +27,12 @@ var stringify_obj = function(add, h_part) {
 		add("'"+h_part.replace(/'/g, "\\'")+"'", true);
 	}
 	else {
-		this.open('{', ',', true);
+		add.open('{', ',', true);
 		for(var s_property in h_part) {
 			add(s_property+': ');
-			stringify_obj.apply(this, [add, h_part[s_property]]);
+			stringify_obj(add, h_part[s_property]);
 		}
-		this.close('}');
+		add.close('}');
 	}
 };
 
@@ -41,7 +41,7 @@ var k_builder = rapunzel({
 		add('// this is the beginning');
 	},
 	body: function(add) {
-		stringify_obj.apply(this, [add, h_obj]);
+		stringify_obj(add, h_obj);
 	},
 	closing: function(add) {
 		add('// this is the end');
