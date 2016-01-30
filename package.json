@@ -11,7 +11,7 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
+  "main": "dist/main/index.js",
   "keywords": [
     "code",
     "string",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "babel-core": "^6.0.20",
     "babel-eslint": "^4.1.4",
+    "classer": "^0.2.0",
     "del": "^2.0.2",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.0.0",

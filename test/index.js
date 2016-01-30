@@ -1,5 +1,5 @@
 import assert from 'assert';
-import rapunzel from '../lib';
+import rapunzel from '../lib/main';
 
 const S_EXPECTS = `// this is the beginning
 {
