@@ -35,7 +35,6 @@
     "isparta": "^4.0.0"
   },
   "scripts": {
-    "prepublish": "gulp prepublish",
     "test": "gulp"
   },
   "license": "ISC",
